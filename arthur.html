@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>For You</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&family=Dancing+Script:wght@500;600&display=swap" rel="stylesheet">
+
+<style>
+body {
+  margin: 0;
+  font-family: 'Playfair Display', serif;
+  color: white;
+  background: black;
+  overflow-x: hidden;
+}
+
+/* 🌌 SAME BACKGROUND FOR ALL PAGES */
+.bg {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background: url('art.gif.gif') no-repeat center/cover;
+  background-size: cover;
+  z-index: -2;
+  filter: brightness(0.5);
+}
+
+.overlay {
+  position: fixed;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.08), transparent 60%);
+  z-index: -1;
+}
+
+/* 🎬 PAGE SYSTEM */
+.page {
+  position: absolute;
+  width: 100%;
+  min-height: 100vh;
+  padding: 25px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  text-align: center;
+
+  opacity: 0;
+  filter: blur(10px);
+  transform: scale(0.98);
+
+  transition: all 0.8s ease;
+  pointer-events: none;
+}
+
+.page.active {
+  opacity: 1;
+  filter: blur(0);
+  transform: scale(1);
+  pointer-events: all;
+}
+
+/* TEXT */
+#text1 {
+  font-family: 'Dancing Script', cursive;
+  font-size: 38px;
+  max-width: 600px;
+  text-align: center;
+  border-right: 2px solid white;
+}
+
+/* BUTTON */
+button {
+  margin-top: 25px;
+  padding: 12px 25px;
+  border: none;
+  border-radius: 25px;
+  background: rgb(125, 97, 235);
+  color: white;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+/* 📸 GALLERY */
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 18px;
+  margin-top: 20px;
+  width: 100%;
+  max-width: 900px;
+}
+
+.img-box {
+  background: white;
+  padding: 10px 10px 30px 10px;
+  border-radius: 6px;
+  transform: rotate(calc(-3deg + 6deg * var(--rand)));
+  box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+  cursor: pointer;
+}
+
+.img-box img {
+  width: 100%;
+  height: 130px;
+  object-fit: cover;
+}
+
+/* 🎥 VIDEO */
+video {
+  width: 100%;
+  border-radius: 15px;
+  max-width: 300px;
+}
+
+/* 👤 NAME GRID */
+.name-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 12px;
+  margin-top: 25px;
+  width: 100%;
+  max-width: 700px;
+}
+
+.name-grid button {
+  padding: 14px;
+  border-radius: 12px;
+  border: none;
+  background: rgba(30, 30, 40, 0.75);
+  color: white;
+  cursor: pointer;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.6);
+}
+
+#memoryBox {
+  border-radius: 30px;
+  background: rgba(30, 30, 40, 0.75);
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  text-align: center;
+  line-height: 1.8;
+}
+/* HOVER MODAL */
+#hoverModal {
+  position: fixed;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0,0,0,0.85);
+  padding: 15px 25px;
+  border-radius: 20px;
+  display: none;
+  z-index: 999;
+}
+.cursor {
+  border-right: 2px solid white;
+  animation: blink 0.8s infinite;
+}
+
+@keyframes blink {
+  50% { border-color: transparent; }
+}
+#endingText {
+  max-width: 900px;
+  text-align: center;
+}
+
+.line {
+  opacity: 0;
+  transform: translateY(20px);
+  font-size: 22px;
+  margin: 15px 0;
+  transition: all 1.5s ease;
+}
+
+.line.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.highlight-line {
+  font-size: 28px;
+  font-weight: bold;
+  color: #4aa3ff;
+  text-shadow: 0 0 15px rgba(226, 224, 231, 0.6);
+}
+</style>
+</head>
+
+<body>
+
+<audio id="bgMusic" loop>
+  <source src="John Mayer - You're Gonna Live Forever in Me (Audio).mp3">
+</audio>
+
+<div class="bg"></div>
+<div class="overlay"></div>
+
+<div id="hoverModal"></div>
+
+<!-- PAGE 1 -->
+<div class="page active" id="page1">
+  <h1 id="text1"></h1>
+  <button onclick="startExperience()">Open</button>
+</div>
+
+<!-- PAGE 2 -->
+<div class="page" id="page2">
+  <h2>The Moments That Stay</h2>
+  <div class="gallery" id="gallery"></div>
+  <button onclick="goToVideos()">Continue</button>
+</div>
+
+<!-- PAGE 3 -->
+<div class="page" id="page3">
+
+  <h2>Little Moments in Motion</h2>
+
+  <div class="gallery">
+    <video src="vid1.mp4" controls></video>
+    <video src="vid2.mp4" controls></video>
+    <video src="vid3.mp4" controls></video>
+  </div>
+
+  <h3 style="margin-top:25px;">People Who Made Moments</h3>
+
+  <div class="name-grid">
+    <button onclick="openMemory('Sofie')">Sofie</button>
+    <button onclick="openMemory('Aya')">Aya</button>
+    <button onclick="openMemory('Thrix')">Thrix</button>
+    <button onclick="openMemory('Allisa')">Allisa</button>
+    <button onclick="openMemory('Rhaine')">Rhaine</button>
+    <button onclick="openMemory('Kim')">Kim</button>
+     <button onclick="openMemory('Angelene')">Angelene</button>
+     <button onclick="openMemory('Krisha')">Krisha</button>
+     <button onclick="openMemory('Juris')">Juris</button>
+     <button onclick="openMemory('Meryll')">Meryll</button>
+     <button onclick="openMemory('Gwen')">Gwen</button>
+    <button onclick="openMemory('Karyl')">Karyl</button>
+    <button onclick="openMemory('Verlin')">Verlin</button>
+    <button onclick="openMemory('Kate')">Kate</button>
+    <button onclick="openMemory('Lexi')">Lexi</button>
+    <button onclick="openMemory('Kurt')">Kurt</button>
+    <button onclick="openMemory('Franz')">Franz</button>
+    <button onclick="openMemory('Zeke')">Zeke</button>
+    <button onclick="openMemory('Gab')">Gab</button>
+  </div>
+
+  <div id="memoryBox"></div>
+
+  <button onclick="goToMessage()">Continue</button>
+</div>
+
+<!-- PAGE 4 -->
+<div class="page" id="page4">
+  <div id="endingText"></div>
+</div>
+
+<script>
+
+/* TYPEWRITER */
+const text = "Before you go... there’s something we want you to carry with you.";
+let t = 0;
+
+function typeWriter() {
+  if (t < text.length) {
+    document.getElementById("text1").innerHTML += text.charAt(t);
+    t++;
+    setTimeout(typeWriter, 40);
+  }
+}
+typeWriter();
+
+/* NAV */
+function switchPage(a, b){
+  document.getElementById(a).classList.remove("active");
+  setTimeout(() => {
+    document.getElementById(b).classList.add("active");
+  }, 400);
+}
+
+function startExperience(){
+  document.getElementById("bgMusic").play();
+  switchPage("page1", "page2");
+}
+
+function goToVideos(){
+  switchPage("page2", "page3");
+}
+
+function goToMessage(){
+  switchPage("page3", "page4");
+  setTimeout(playEndingScene, 800);
+}
+
+/* ⭐ 73 IMAGE MESSAGES (RESTORED) */
+const messages = [
+"You made every moment brighter.",
+"Your kindness never went unnoticed.",
+"You changed people in the best way.",
+"We’ll carry your laughter with us.",
+"You made ordinary days feel special.",
+"You have a heart people admire.",
+"You leave behind beautiful memories.",
+"You made people feel seen and valued.",
+"You were someone people could count on.",
+"You made the world softer and kinder.",
+"You brought warmth wherever you went.",
+"You made people smile without trying.",
+"You left a mark that won’t fade.",
+"You were a light in so many lives.",
+"You made life feel a little lighter.",
+"You gave more than you ever took.",
+"You inspired more people than you know.",
+"You’ll always be remembered fondly.",
+"You made life feel lighter.",
+"You were truly one of a kind.",
+"You made people feel at home.",
+"You’ll always live in our memories.",
+"You turned moments into memories.",
+"You had a beautiful soul.",
+"You mattered more than words can say.",
+"You made people feel safe.",
+"You gave people reasons to smile.",
+"You made a difference just by being you.",
+"You were deeply appreciated.",
+"You made life better for others.",
+"You’ll always be missed dearly.",
+"You created moments we’ll never forget.",
+"You left behind so much love.",
+"You made hearts feel full.",
+"You were someone truly special."
+];
+
+/* ⭐ FIXED IMAGE HOVER */
+const gallery = document.getElementById("gallery");
+const modal = document.getElementById("hoverModal");
+
+for (let i = 1; i <= 73; i++) {
+  const box = document.createElement("div");
+  box.className = "img-box";
+  box.style.setProperty('--rand', Math.random());
+
+  const img = document.createElement("img");
+  img.src = i + ".jpg";
+
+  box.appendChild(img);
+
+  box.addEventListener("mouseenter", () => {
+    modal.style.display = "block";
+    modal.innerText = messages[i % messages.length];
+  });
+
+  box.addEventListener("mouseleave", () => {
+    modal.style.display = "none";
+  });
+
+  gallery.appendChild(box);
+}
+
+/* MEMORY */
+const memoryBox = document.getElementById("memoryBox");
+
+ const memoryMessages = {
+  Aya: `Hii, Arthur!! As I write this message, just know that I'm deeply 
+  thankful for the bond that we created and I'm beyond happy seeing you grow here
+before you leave, because we had watch every struggles you had faced. 
+You might not know but you were like a "kuya" to me because I have seen every 
+moments that we were together, you cared not just as a friend, but also as someone 
+who deeply treats me as his sisterㅡand I truly appreciate it all the time. I'll miss 
+those after school walks those times when we're tired and drained, yet a single gesture and 
+shared laughter could ease it easily. I hope you'd still choose to keep going even when life
+ is hardㅡkeep growing and improving yourself along the way. Thank you for being so kind to us 
+ and for letting me experience what are friends for. Keep striving for more and we wish you a 
+ lot of success in the year ahead. We love youuu!!`,
+
+  Juris: `Hi, Arth! You know I still find it hard to believe that you are leaving 
+for the US. Ang bilis ng panahon like super. From our unexpected friendship nung 
+Grade 9, like who would've thought that we would be this close. If it was not for
+Yosh, baka hindi pa tayo nagkaroon ng chance na maging ganito, and I am really
+grateful that things happened the way they did.
+Thank you for always being there through my ups and downs. 
+You have been one of the people I can truly count on, especially during the 
+times when I am not okay. Kahit hindi ko sabihin, you somehow know when something 
+is wrong, and you always find a way to make me feel better. That is something I will
+ always appreciate and never forget.
+I will also never forget how you became my unexpected prom partner. Out of all the 
+things that could have happened, that was definitely one of the most unexpected, but I 
+would not have wanted it any other way.
+Ang dami na rin talaga nating memories together...
+2 years of friendship yet it felt like forever... I love u, arth!
+
+-Jurjur :)`,
+
+  Thrix: `Bestieee, I’m so happy for you but also super sad kasi you’re moving to another
+   country na. Like wow, new chapter, new life, new everything. I know you’ll do so well 
+   there because you can literally handle anything. Just don’t forget us ha. Distance is 
+   nothing when the friendship is real. I’ll miss our chikahan and random moments so much, 
+   but we are always one chat away. Go shine there, proud na proud me sayo. Have a safe flight 
+   bestieee! We wuv u 🩷✨` ,
+  Rhaine: `Hi arthur, Sorry if hindi me makakasama sa surprised party para sayo. 
+Triny ko naman nung nakaraan e-extend yung byahe ko makasama lang sana, pero 
+hindi na tuloy nung April 11 and April 25.
+Anyways, Super thankful ako na nakilala kita sana alam mo yan HAHA. Everytime na 
+magkakasama tayo nila marin at ursua sa 4th floor ikaw palagi ang happy pill namin. 
+Ma mimiss kitang sabihan ng "pokpok" everytime na mag kwe-kwento ka ng mga lalaki mo HAHA.
+ Since grade 10 alam ko na super bait mo, thank you sa mga tulong at kunting advice mo sakin
+  at syempre yung mga complements mo sakin na hinding hindi ko malilimutan. 
+Pag dating mo sa America mag ingat ka palagi sa mga lalaki hah, malalaki ang mga anoh nyan 
+ilang beses ko na sinabi sayo yan HAHAHA. 
+Super ma mimiss kita ikaw pa naman ang number 1 basher at kaaway ko na hindi na pipikon.
+ I love you so much Arthur, I'll miss you!`,
+
+  Kim: `Helloo! It’s been a while since the last time we’ve had an interaction in person, 
+  and honestly, nabigla ako sa balitang narinig ko huhuh. It made me sad to think na baka 
+  last na natin ’yun na kita.
+But still, I’m happy kasi alam ko na mas dadami yung opportunities na darating sa’yo, 
+especially for your future career. Deserve mo ’yon.
+I just want to thank you for being the friendliest, most gentle, and genuine friend I had 
+during my Grade 10 journey. You made that season lighter for me. Please don’t change that 
+soft version of yourself—it’s rare, and it’s something people truly need these days.
+I know you’re going to meet new friends there, and kami rin naman, but sana hindi mo pa rin 
+kami makalimutan. No matter where life takes you, carry the same heart you’ve always had.
+Do what makes the Lord happy, ate ko. I’m really proud of you. I'll keep you in my prayers
+ for your safe journey`,
+
+  Krisha: `Hi Arthur!!! I’ve been thinking about what to say ever since you told me you’re 
+  leaving, and honestly, ang dami kong gustong sabihin pero hindi ko alam kung saan magsisimula.
+First of all, I just want you to know how grateful I am to have you in my life. You’re not just
+ part of my circle, you’re my first best friend outside of it, and that really means a lot to me.
+Hindi lahat ng tao nakakahanap ng ganung klaseng friendship, and I’m really thankful na ikaw ‘yon.
+I’ll always treasure all the memories we shared, yung tipong kahit mga simpleng kwentuhan, tawanan,
+ at kahit yung mga random moments na hindi natin napansin na magiging special pala. Those moments
+  will always stay with me, kahit gaano ka pa kalayo.
+I’m really proud of you, for everything you’ve achieved so far and for everything you’re about to 
+accomplish. I know this decision isn’t easy, but I also know it’s for your future, and you deserve 
+all the opportunities coming your way.
+You’re doing something brave, and I admire you for that. Even if you’re leaving, please know that
+ I’ll always be here. I’ll be cheering for you from afar, and I’ll be waiting for the day na 
+ magkikita ulit tayo and we can catch up like nothing changed.
+Take care of yourself always, okay? Don’t forget me. And no matter where life takes you, you’ll 
+always have a place here in my life.
+I’m going to miss you, bye my Arthurrr I love you so much!!!`
+};
+
+function typeWriterMemory(text){
+  const box = document.getElementById("memoryBox");
+  box.innerHTML = "";
+
+  let i = 0;
+  const speed = 12;
+
+  function type(){
+    if (i < text.length) {
+
+      let current = text.substring(0, i + 1);
+
+      // preserve line breaks nicely while typing
+      box.innerHTML = current.replace(/\n/g, "<br>") + "<span class='cursor'></span>";
+
+      i++;
+
+      setTimeout(type, speed);
+
+    } else {
+      box.innerHTML = text.replace(/\n/g, "<br>");
+    }
+  }
+
+  type();
+}
+function openMemory(name){
+  const message = memoryMessages[name];
+  typeWriterMemory(message);
+}
+
+function playEndingScene(){
+  const container = document.getElementById("endingText");
+  container.innerHTML = "";
+
+  const endingLines = [
+    { text: "Some people come into our lives quietly..." },
+    { text: "and leave without ever making a sound." },
+    { text: "But somehow..." },
+    { text: "they change everything." },
+    { text: "Not in loud ways..." },
+    { text: "not in obvious ways..." },
+    { text: "But in the way they made us feel." },
+    { text: "In the laughter we still remember." },
+    { text: "In the moments that still feel warm." },
+    { text: "And even when time moves forward..." },
+    { text: "those pieces stay." },
+    { text: "Not just in memories..." },
+    { text: "but in who we’ve become." },
+    { text: "So wherever life takes you next..." },
+    { text: "just know this—" },
+    { text: "you were something special.", highlight: true },
+    { text: "And you always will be.", highlight: true }
+  ];
+
+  endingLines.forEach((line, i) => {
+    const div = document.createElement("div");
+    div.className = "line";
+    div.innerText = line.text;
+
+    if (line.highlight) {
+      div.classList.add("highlight-line");
+    }
+
+    container.appendChild(div);
+
+    setTimeout(() => {
+      div.classList.add("show");
+    }, i * 2000);
+  });
+}
+</script>
+
+</body>
+</html>
