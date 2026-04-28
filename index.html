@@ -190,13 +190,39 @@ video {
   color: #4aa3ff;
   text-shadow: 0 0 15px rgba(226, 224, 231, 0.6);
 }
+.ate-btn {
+  grid-column: 1 / -1; /* spans entire row */
+  justify-self: center; /* centers horizontally */
+}
+.memory-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 25px;
+  flex-wrap: wrap;
+}
+
+#memoryBox {
+  max-width: 400px;
+  padding: 20px;
+}
+
+#memoryImage {
+  width: 220px;
+  height: 220px;
+  object-fit: cover;
+  border-radius: 20px;
+  display: none;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+}
 </style>
 </head>
 
 <body>
 
 <audio id="bgMusic" loop>
-  <source src="John Mayer - You're Gonna Live Forever in Me (Audio).mp3">
+  <source src="Noah Kahan & Brandi Carlile - You’re Gonna Go Far (Lyrics).mp3">
 </audio>
 
 <div class="bg"></div>
@@ -231,8 +257,11 @@ video {
   <h3 style="margin-top:25px;">People Who Made Moments</h3>
 
   <div class="name-grid">
+    <button class="ate-btn" onclick="openMemory('ATE')">ATE</button>
+    <button class="ate-btn" onclick="openMemory('Alyxa')">Alyxa</button>
     <button onclick="openMemory('Sofie')">Sofie</button>
     <button onclick="openMemory('Aya')">Aya</button>
+     <button onclick="openMemory('lexi')">lexi</button>
     <button onclick="openMemory('Thrix')">Thrix</button>
     <button onclick="openMemory('Allisa')">Allisa</button>
     <button onclick="openMemory('Rhaine')">Rhaine</button>
@@ -241,18 +270,22 @@ video {
      <button onclick="openMemory('Krisha')">Krisha</button>
      <button onclick="openMemory('Juris')">Juris</button>
      <button onclick="openMemory('Meryll')">Meryll</button>
+     <button onclick="openMemory('Zhenrihada')">Zhenrihada</button>
      <button onclick="openMemory('Gwen')">Gwen</button>
     <button onclick="openMemory('Karyl')">Karyl</button>
     <button onclick="openMemory('Verlin')">Verlin</button>
     <button onclick="openMemory('Kate')">Kate</button>
-    <button onclick="openMemory('Lexi')">Lexi</button>
+    <button onclick="openMemory('Chy')">Chy</button>
     <button onclick="openMemory('Kurt')">Kurt</button>
     <button onclick="openMemory('Franz')">Franz</button>
     <button onclick="openMemory('Zeke')">Zeke</button>
     <button onclick="openMemory('Gab')">Gab</button>
   </div>
 
+  <div class="memory-container">
   <div id="memoryBox"></div>
+  <img id="memoryImage" src="" alt="memory" />
+</div>
 
   <button onclick="goToMessage()">Continue</button>
 </div>
@@ -335,14 +368,61 @@ const messages = [
 "You created moments we’ll never forget.",
 "You left behind so much love.",
 "You made hearts feel full.",
-"You were someone truly special."
+"You were someone truly special.",
+"You made every day feel a little brighter.",
+"You gave people comfort without even trying.",
+"You were always someone worth remembering.",
+"You made small moments feel big.",
+"You had a way of making everything better.",
+"You made people feel important.",
+"You left smiles wherever you went.",
+"You were someone people trusted deeply.",
+"You made life feel more meaningful.",
+"You gave warmth in the simplest ways.",
+"You made people laugh when they needed it most.",
+"You were a safe place for many.",
+"You made ordinary things feel magical.",
+"You were someone people looked up to.",
+"You made hearts feel lighter.",
+"You gave more love than you realized.",
+"You made every memory worth keeping.",
+"You were someone unforgettable.",
+"You made people feel understood.",
+"You gave people reasons to stay strong.",
+"You made kindness look effortless.",
+"You were a quiet kind of special.",
+"You made people feel less alone.",
+"You gave meaning to simple days.",
+"You were someone people cherished.",
+"You made every second count.",
+"You gave joy without asking for anything back.",
+"You were always enough.",
+"You made life softer just by being there.",
+"You gave people hope in small ways.",
+"You were a beautiful part of many lives.",
+"You made people feel valued.",
+"You gave light even on dark days.",
+"You were someone truly rare.",
+"You made memories people will hold forever.",
+"You gave more than words can explain.",
+"You were deeply loved, always.",
+"You made life feel warm.",
+"You gave happiness in the smallest things.",
+"You were someone people needed.",
+"You made everything feel a little better.",
+"You gave people something to smile about.",
+"You were a part of something special.",
+"You made moments feel timeless.",
+"You gave love without limits.",
+"You were someone worth missing.",
+"You made everything feel right somehow."
 ];
 
 /* ⭐ FIXED IMAGE HOVER */
 const gallery = document.getElementById("gallery");
 const modal = document.getElementById("hoverModal");
 
-for (let i = 1; i <= 73; i++) {
+for (let i = 1; i <= 82; i++) {
   const box = document.createElement("div");
   box.className = "img-box";
   box.style.setProperty('--rand', Math.random());
@@ -368,6 +448,62 @@ for (let i = 1; i <= 73; i++) {
 const memoryBox = document.getElementById("memoryBox");
 
  const memoryMessages = {
+  Alyxa:`Dear : kuya Luis 
+I'm going to miss our time together bonding All the time even 
+tho sometimes nag aaway tayo 😅 but I love you kuya I'll always
+ do and Sana Pag dating mo nag Korea chat mo agad ako at sabihin na 
+ kung ano itsura nag Incheon airport ihih but ingat ka sa U.S kuya, 
+ ma mi miss kita nag sobra ikaw ang partner in crime ko palagi at di 
+ mag babago Yun ikaw Pina ka close ko sa lahat ikaw yung nag check check 
+ kung okay lng ako Pero minsan di ka sumasagot sa tawag ko 🙁 , 
+ Pero sana Pag asa U.S kana call mo ko palagi, if you want someone to 
+ talk to andito lng ako kuya, again I will miss you kuya and I lava yuu!!
+
+From: ur loving little sister alyxa💖`,
+
+Franz:`Hi Arthur,thank you for all the moments we shared,it truly meant a lot to me. 
+I hope that in your next school year you'll miss us and I hope that you find happiness 
+in everything you do.` ,
+
+Karyl:`Hi beybs, I honestly have been thinking so much about what to say, and it’s not easy
+ putting everything into words of how much you mean to me. I just want you to know how grateful
+  i am that i met someone like you and have you as one of a good friend in my life.
+
+Throughout our senior high school year, you have been such a constant source of happiness, 
+comfort and support. And, I appreciated how you let me be myself around. I even remember you
+ pulling funny faces and random jokes. Also, to those moments when you're so sleepy or running
+  late but you still manage to attend our class.
+
+For the highlights, I will never forget those days and late nights we spent working together on
+ our miniature projects—tired but we still continued and made it to the deadline.
+And I always admire how passionate you are about arts and illustration, it honestly amazes me 
+how creative and talented you are. Plus, your love for music and cartoon characters which where
+ I’m glad i got to see that side of you.
+
+In realization, it won’t be the same again with you leaving. But at the same time, I'm so proud 
+of you. You deserve all the new opportunities coming through your way. 
+Just remember that you have someone like me who genuinely cares about you and is always rooting 
+for you, no matter how far you go.
+
+Thank you for everything, truly. Take care of yourself out there and best of luck in your new 
+chapter. 😚💕`,
+
+  ATE:`Hello lulichichoy, 
+I will always remind you that I prayed for you, that time felt impossible na
+mag karon pa kami ng kapatid kasi malaki na kami ni kuya mo. Pero you were given
+samin. From the day nakarga kita. I promised and made sure I will protect and 
+support you in all cost.
+Para akong batang ina kaka alaga sayo hahaha. I am lucky or shall I said WE to 
+have you in our lives. You were my main reason to be strong. You know how much I 
+love you Kaya medyo na tatakot ako to let you go on your own. Pero Yeap life goes 
+like this, I need to accept na hindi sa lahat ng bagay I will be there. You need to 
+learn and grow on your own.
+Basta. Kung san ka masaya where your heart desires dun ako. Just make sure you’re safe 
+and not suffering ah.
+This journey of your life is an opportunity to grow and learn , NOT to pressure to provide.
+ You don’t have to so don’t think of anything to provide in return. I love you so so so much. I have 5 more days before seeing you soon.
+Love Ate🩵`,
+
   Aya: `Hii, Arthur!! As I write this message, just know that I'm deeply 
   thankful for the bond that we created and I'm beyond happy seeing you grow here
 before you leave, because we had watch every struggles you had faced. 
@@ -379,6 +515,35 @@ shared laughter could ease it easily. I hope you'd still choose to keep going ev
  is hardㅡkeep growing and improving yourself along the way. Thank you for being so kind to us 
  and for letting me experience what are friends for. Keep striving for more and we wish you a 
  lot of success in the year ahead. We love youuu!!`,
+
+ lexi:`Hey Arthur!
+Like, I can't believe you're literally leaving na?? Parang weird hwhaha kasi sanay ako na you’re always there.
+I just want to say thank you for, like, everything. I Remember when i transfer in MHS. Honestly, akala ko wala 
+akong magiging friend sa room kasi ang introvert ko, pero you made the first move and nag-approach ka sakin.
+ I’m super thankful na nakilala kita. From zero to partner in crime real quick HAHAHA
+Thank you kasi you’re always there when I have problems. Like, you never get tired of my rants kahit na ang 
+drama ko sometimes. You’re literally my safe space.
+And OMG thank you kasi because of you, I met so many new people. You introduced me to your friends, you included 
+me sa circle mo, tapos biglang my high school life became so much better. Like, before I was super tahimik, 
+pero because of you, I became more social.
+
+I’m gonna miss you sooo much. Mamimiss ko yung pag-gawa natin ng projects or ng mga miniature natin - ang saya kaya 
+natin dun kahit stress sa deadline HAHAHA. Mamimiss ko rin yung pagtambay sa bahay nyo after class. 
+Who’s gonna be my ka-kulitan now? Who’s gonna be my partner in crime sa mga kalokohan natin? It’s not gonna be
+ the same without you sa grade 12.
+
+But I’m super happy for you and your new journey abroad. I know you’ll do amazing there. Just, like, don’t 
+forget us here okay? Don’t forget your GATES PARENTS, yung mga projects natin, yung tambayan, and please don’t
+ forget me ha 😭
+
+Promise me we’ll still do video calls? And when you come back to the Philippines, you owe me Jollibee and milk 
+tea as bayad for all my tears today HAHAHA
+Ingat ka always there. I’m gonna miss you so much. Love you!
+
+Lovelots  
+Lexi!
+
+P.S. Update me when you land ha. I need to know you’re safe. And send me pics ng new life mo there!`,
 
   Juris: `Hi, Arth! You know I still find it hard to believe that you are leaving 
 for the US. Ang bilis ng panahon like super. From our unexpected friendship nung 
@@ -446,7 +611,84 @@ You’re doing something brave, and I admire you for that. Even if you’re leav
  magkikita ulit tayo and we can catch up like nothing changed.
 Take care of yourself always, okay? Don’t forget me. And no matter where life takes you, you’ll 
 always have a place here in my life.
-I’m going to miss you, bye my Arthurrr I love you so much!!!`
+I’m going to miss you, bye my Arthurrr I love you so much!!!` ,
+
+Kate: `Hi, Arthur!
+Hindi ko alam kung paano sisimulan, pero ang bigat sa feeling na aalis ka na. 
+Parang ang bilis ng lahat—parang kahapon lang, magkasama lang tayo, nagkukulitan,
+nagkukwentuhan tungkol sa kung ano ano habang nakatambay sa bahay mo haha.
+Thank you for being one of the people na naging safe place ko. Yung tipong kahit
+anong mangyari, you are here for me. Hindi magiging pareho ang mga araw dito without you,
+pero I’m really happy for you sa new chapter na haharapin mo pag umalis kana.
+Thank you so much kasi kinausap mo ako nung time na wala akong makausap dahil nahihiya ako. Arthur,
+I am really thankful na you became my bestfriend and lagi ka nandyan saamin.
+Mamimiss na namin yung mga memories na ginawa natin especially yung ginawa natin sa bahay mo everytime haha.
+I really don't know what will gonna happen to me if ever na hindi mo ako nilapitan at kinaibigan, Arthur.
+I hope you don’t forget us ah kahit busy ka na. Message mo pa rin kami ha, kahit random updates lang or
+kahit memes lang or kwentuhan okay na yun.
+And kahit malayo ka na, tandaan mo na nandito lang kami lagi, cheering for you. I hope matupad mo yung 
+pangarap mo as an Animator, we will be your first and forever fan.
+Kahit ngayon, we will always be your friends no matter how far we are, I love you, Arthur!💗💗💗
+I am grateful din na you are there na tumatayo na kuya samin lalo na yung nag swimming tayo. Apologize
+if may mga nagawa akong hindi mo gusto, I am really sorry if I said something wrong.
+I really hope na you won't forget the good times we had, the bondings and all.
+And this isn't goodbye ah, see you soon dapat hihi. Ingat ka palagi.
+I’ll miss you so much, Arthur 💗💗💗` ,
+
+Zhenrihada:`Hi momsh! time flies so fast magugulat nalang ako nasa airplane kana landing to US. But oh well, 
+i'm really happy for you kasi good opportunities and a bright future is ahead of you! Pero malungkot
+ padin kasi we only had a short time:(. I wish you to have a safe flight, a happy future, and a good 
+ environment okay bestie ugh. Honestly, i still keep convincing myself na baka eme eme lang 'to and
+  matagal pa flight mo kasi it's too fast like everything's moving too fast but here we are, next month 
+  na lipad mo:( tapos ang dami ko pang hindi na cchika sayo since we barely see each other at school. 
+  Reality hits hard naman, but i'm really so happy for you bestie:( huhuhueueuee. Wag mo kami kakalimutan ha? 
+  kahit sa maleta nalang ako.. hehe`,
+
+  Allisa:`My dearest Arthur, charet kala mo nasa movie ih noh. Ok ser use
+Hii Arthur :)), thankyou so much for being my friend, even though we only
+ met nung grade 10, i’m still very thankful, kahit maikling panahon lang tayo 
+ nagkasama naging close kita and you’re one of my friends that i can always 
+ rely on and depend to, my One call away and the friend that is super ma-effort. 
+ And the kindest person and understanding, that no matter who is the person, u
+  greet them with a smile. :))
+I’m super thankful sa lahat ng bagay na nagawa mo para sakin, specially sa arts 
+na nagawa mo samin and SAKINNN <33, just because gifts that i would always treasure.
+ I rlly appreciate u sm, arthur. 
+Sure na ba talaga aalis ka? Hahshwh:( ingat ka lang dyan, arthur namin. I hope you 
+know na andito lang kami para sa’yo, even tho minsan lang tayo nagkakausap, sana alam
+ mong di mababago friendship o pagkakaibigan natin, pag-uuwi ka pinas don’t forget to 
+ message us ha? Andito kami lagi!! We’ll surely gonna miss uuuu. Thankyou for being a wonderful friend of mine ❤
+Chopsuey~` ,
+
+Chy:`My dear Arthur... chz AHAHAHAHAHAH
+
+hii artzy fartzyy, i'll miss you a bunchh kasi di na tayo naguusap ng masyado unlike
+ before during pandemicc. I'll miss our little art trades, vc all day sa server, 
+ roblox palagi, tas mga ano2 na pinaguusapan HAHSHAHWHWHWH. Another thing is that
+  I will never forget how I was so proud to be part of your little FNF projects back then. 
+  I was so so so happy to create art with you and even make it into a game hehe. 
+  Kahit di pa tayo nagkikita, i'll never forget how much you've made an impact
+   to me during pandemic and after. I wish we could've met earlier pero I understand 
+   na busy ka and busy din ako pero nonetheless kahit hindi pa tayo nagkita you wil
+   l always be someone I will never forget.
+I hope living in the US will treat you well, I also hope to talk to you more often
+ pero parang yung timezones natin ang magiging problema huhu. I wish you the best sa 
+ future mo ober der! Sorreh kung wala ako masyadong sasabihin, medj sadgirl ako chz HAHAHSHAHAH. 
+ Sana pagbalik mo we can meet somewhere hehe
+
+SEE YOU ARTZYY SANA HINDI KA MAGKA AIRCON HUMOR DYAN WAHAHAHAHHAAHHA HAVE FUN BLEEHH`
+};
+
+const memoryImages = {
+  Aya: "9.jpg",
+  Juris: "58.jpg",
+  Thrix: "64.jpg",
+  Rhaine: "81.jpg",
+  Kim: "kim.jpg",
+  Krisha: "75.jpg",
+  Kate: "kate.jpg",
+  Zhenrihada: "83s.jpg",
+  Allisa: "50.jpg"
 };
 
 function typeWriterMemory(text){
@@ -477,9 +719,17 @@ function typeWriterMemory(text){
 }
 function openMemory(name){
   const message = memoryMessages[name];
-  typeWriterMemory(message);
-}
+  const img = document.getElementById("memoryImage");
 
+  typeWriterMemory(message);
+
+  if (memoryImages[name]) {
+    img.src = memoryImages[name];
+    img.style.display = "block";
+  } else {
+    img.style.display = "none";
+  }
+}
 function playEndingScene(){
   const container = document.getElementById("endingText");
   container.innerHTML = "";
