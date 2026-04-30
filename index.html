@@ -222,7 +222,10 @@ video {
 <body>
 
 <audio id="bgMusic" loop>
-  <source src="Noah Kahan & Brandi Carlile - You’re Gonna Go Far (Lyrics).mp3">
+  <source src="Noah Kahan & Brandi Carlile - You’re Gonna Go Far (Lyrics).mp3" type="audio/mpeg">
+</audio>
+<audio id="sofieAudio">
+  <source src="art.mp3" type="audio/mpeg">
 </audio>
 
 <div class="bg"></div>
@@ -297,6 +300,8 @@ video {
 
 <script>
 
+
+
 /* TYPEWRITER */
 const text = "Before you go... there’s something we want you to carry with you.";
 let t = 0;
@@ -319,7 +324,15 @@ function switchPage(a, b){
 }
 
 function startExperience(){
-  document.getElementById("bgMusic").play();
+  const bgMusic = document.getElementById("bgMusic");
+
+  bgMusic.volume = 0.4;
+
+  bgMusic.currentTime = 0;
+  bgMusic.play().catch(()=>{});
+
+  musicStarted = true;
+
   switchPage("page1", "page2");
 }
 
@@ -569,6 +582,7 @@ Ang dami na rin talaga nating memories together...
    nothing when the friendship is real. I’ll miss our chikahan and random moments so much, 
    but we are always one chat away. Go shine there, proud na proud me sayo. Have a safe flight 
    bestieee! We wuv u 🩷✨` ,
+
   Rhaine: `Hi arthur, Sorry if hindi me makakasama sa surprised party para sayo. 
 Triny ko naman nung nakaraan e-extend yung byahe ko makasama lang sana, pero 
 hindi na tuloy nung April 11 and April 25.
@@ -676,16 +690,52 @@ I hope living in the US will treat you well, I also hope to talk to you more oft
  future mo ober der! Sorreh kung wala ako masyadong sasabihin, medj sadgirl ako chz HAHAHSHAHAH. 
  Sana pagbalik mo we can meet somewhere hehe
 
-SEE YOU ARTZYY SANA HINDI KA MAGKA AIRCON HUMOR DYAN WAHAHAHAHHAAHHA HAVE FUN BLEEHH`
+SEE YOU ARTZYY SANA HINDI KA MAGKA AIRCON HUMOR DYAN WAHAHAHAHHAAHHA HAVE FUN BLEEHH` ,
+
+Gwen:`Hello Arthur,this is Gwen! Just so you know, I will miss our interactions and 
+conversations in school. Thank you for being my friend for a very long time. I know 
+moving into another country and starting a new semester in another academic system is a 
+huge adjustment but I'm sure you can handle it. I know you're adventurous and willing to
+ risk it all and you give it your all, you don't give up and don't let negativity affect 
+ you that easily. But hopefully, we can have a reunion with the Aquinas Fam. Whenever things
+  get tough, just remember, kung kaya mo yung grade 11, kaya mo rin harapin mga Hamon sa new 
+  school mo. Show them what you're capable of and make the most of every single moment!
+   Make new friends! (⁠ﾉ⁠◕⁠ヮ⁠◕⁠)⁠ﾉ⁠*⁠.⁠✧ this is your time to shine and also the new beginning of a 
+   new chapter in your life. Stay safe and study hard, I will miss you much!` ,
+
+Sofie: `Alam mo, ang dami kong gustong sabihin bago ka umalis, pero kahit anong isip ko parang kulang pa rin yung words.
+
+I’m really happy for you. Sobrang laki ng opportunity na ‘to and you deserve everything good na dadating sa’yo sa America. Pero at the same time, ang sakit din kasi hindi na magiging same lahat dito without you.
+
+Gusto ko lang ipaalala sa’yo yung bagay na minsan naiisip mo. Yung feeling mo na parang “floater friend” ka lang, na nandiyan ka para sa lahat pero parang wala talagang para sa’yo. Yung feeling na parang hindi ikaw yung favorite ng kahit sino.
+
+Pero please believe me when I say this. Hindi yun totoo.
+
+Hindi ka “just there.” Hindi ka extra. Hindi ka option. You are someone people hold onto in ways na hindi lang laging nasasabi. Ikaw yung klase ng tao na madaling lapitan, madaling kausapin, at sobrang dali mahalin bilang kaibigan.
+
+Siguro may mga tao lang na may label na “best friend” with someone else, pero that doesn’t mean na mas less ka. Iba-iba lang talaga kung paano mag connect ang tao. Pero that doesn’t change the fact na you are deeply valued.
+
+Kung hindi mo man nararamdaman minsan, gusto ko malaman mo na ikaw yung tipo ng tao na hinahanap kapag wala. Yung presence mo, hindi napapalitan. Yung pagiging ikaw, hindi kayang i-replace ng kahit sino.
+
+And if ever dumating yung time na maisip mo na wala kang “favorite person,” tandaan mo to. Ikaw yung favorite namin in our own ways. Hindi lang namin siguro nasasabi palagi, pero totoo yun.
+
+Pagdating mo doon, I hope you don’t carry that doubt with you. I hope you carry the truth instead. That you are loved, that you matter, and that you will always have a place here.
+
+Please stay kind. Kahit ang cruel ng mundo minsan. That part of you is something rare and something people need. Don’t let the world take that away from you.
+
+We’ll miss you more than you think. And kahit gaano ka kalayo, nandito lang kami.
+
+Ingat ka palagi. And don’t ever forget how special you are. 🤍`
 };
 
 const memoryImages = {
+  Sofie:"70.jpg" ,
   ATE: "10.jpg",
   Aya: "9.jpg",
   Juris: "58.jpg",
   Thrix: "64.jpg",
   Rhaine: "81.jpg",
-  Kim: "kim.jpg",
+  Alyxa: "88.jfif",
   Krisha: "75.jpg",
   Kate: "kate.jpg",
   Zhenrihada: "83s.jpg",
@@ -719,16 +769,28 @@ function typeWriterMemory(text){
   type();
 }
 function openMemory(name){
-  const message = memoryMessages[name];
-  const img = document.getElementById("memoryImage");
+  const text = memoryMessages[name];
+  const img = memoryImages[name];
 
-  typeWriterMemory(message);
+  if (!text) return;
 
-  if (memoryImages[name]) {
-    img.src = memoryImages[name];
-    img.style.display = "block";
+  typeWriterMemory(text);
+
+  const imgBox = document.getElementById("memoryImage");
+
+  if (img) {
+    imgBox.src = img;
+    imgBox.style.display = "block";
   } else {
-    img.style.display = "none";
+    imgBox.style.display = "none";
+  }
+
+  // 🎵 ONLY Sofie plays art.mp3
+  if (name === "Sofie") {
+    const sofieAudio = document.getElementById("sofieAudio");
+    sofieAudio.volume = 0.10;
+    sofieAudio.currentTime = 0;
+    sofieAudio.play().catch(()=>{});
   }
 }
 function playEndingScene(){
